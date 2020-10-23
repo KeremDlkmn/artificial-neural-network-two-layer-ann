@@ -57,12 +57,10 @@ def compute_cost_NN(A_2, Y, parameters):
 ## Backward Propagation ##
 def backward_propagation(parameters, cache, X, Y):
     
-    # Geriye doğru 2.Layer'da bulunan weight, bias türevi alındı
     Dz_2 = cache['A_2'] - Y
     Dw_2 = np.dot(Dz_2, cache['A_1'].T) / X.shape[1]
     Db_2 = np.sum(Dz_2, axis=1, keepdims=True) / X.shape[1]
 
-    # Geriye doğru 1.Layer'da bulunan weight, bias türevi alındı
     Dz_1 = np.dot(parameters['weight_2'].T, Dz_2) * (1 - np.power(cache['A_1'], 2))
     Dw_1 = np.dot(Dz_1, X.T) / X.shape[1]
     Db_1 = np.sum(Dz_1, axis=1, keepdims=True) / X.shape[1]
